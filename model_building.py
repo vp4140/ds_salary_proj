@@ -76,19 +76,19 @@ gs = GridSearchCV(rf,parameters,scoring='neg_mean_absolute_error',cv=3)
 gs.fit(X_train,y_train)
 
 gs.best_score_
-gs.best_estimator_
+print(gs.best_estimator_)
 
 # test ensembles 
 tpred_lm = lm.predict(X_test)
 tpred_lml = lm_l.predict(X_test)
 tpred_rf = gs.best_estimator_.predict(X_test)
-
+print(tpred_rf)
 from sklearn.metrics import mean_absolute_error
 mean_absolute_error(y_test,tpred_lm)
 mean_absolute_error(y_test,tpred_lml)
 print(mean_absolute_error(y_test,tpred_rf))
 
-mean_absolute_error(y_test,(tpred_lm+tpred_rf)/2)
+print(mean_absolute_error(y_test,(tpred_lm+tpred_rf)/2))
 
 import pickle
 pickl = {'model': gs.best_estimator_}
@@ -101,4 +101,4 @@ with open(file_name, 'rb') as pickled:
 
 model.predict(np.array(list(X_test.iloc[1,:])).reshape(1,-1))[0]
 
-list(X_test.iloc[1,:])
+print(list(X_test.iloc[1,:]))
